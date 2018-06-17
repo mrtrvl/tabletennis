@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         persons: [],
-        allPersons: []
+        allPersons: [],
+        loading: false
     },
     mutations: {
       addPerson(state, personId) {
@@ -21,6 +22,9 @@ export const store = new Vuex.Store({
       },
       setAllPersons(state, personListFromXML) {
           state.allPersons = personListFromXML;
+      },
+      changeLoadingState(state) {
+          state.loading = !state.loading;
       }
     },
     getters: {
@@ -57,6 +61,9 @@ export const store = new Vuex.Store({
             } else {
                 return false;
             }
+        },
+        loadingState: state => {
+            return state.loading;
         }
     }
 });

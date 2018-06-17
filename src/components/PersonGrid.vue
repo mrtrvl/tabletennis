@@ -41,5 +41,8 @@ export default {
 </script>
 
 <style>
-
+    .scrollable {
+        max-height: 600px;
+        overflow-y: scroll;
+    }
 </style>

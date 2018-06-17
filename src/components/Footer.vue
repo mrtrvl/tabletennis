@@ -1,6 +1,6 @@
 <template>
     <div class="row text-center">
-        <button class="btn btn-success" @click="getPersonsXML">Lae alla mängijate nimekiri</button>
+        <button class="btn" v-bind:class="{ 'btn-success': countAllPersons === 0, 'btn-light': countAllPersons != 0 }" @click="getPersonsXML">Lae alla mängijate nimekiri</button>
     </div>
 </template>
 
@@ -16,12 +16,13 @@ export default {
     },
     methods: {
         getPersonsXML() {
+            this.$store.commit('changeLoadingState');
             axios.get('http://www.lauatennis.ee/app_partner/app_eltlid_reitinguga_xml.php')
                 .then(response => {
                     parseString(response.data, (err, result) => {
                         const persons = this.convertPersonsFromXML(result.PERSONS.PERSON);
                         this.$store.commit('setAllPersons', persons);
-                        alert('Nimekiri laetud');
+                        this.$store.commit('changeLoadingState');
                 });        
             })
         },
@@ -37,7 +38,7 @@ export default {
                 });
             });
             return convertedPersons;
-        }
+        },
     }
 }
 </script>

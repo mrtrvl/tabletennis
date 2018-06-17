@@ -1,12 +1,14 @@
 <template>
     <div class="container">
-        <app-header></app-header>
-        <div class="row">
+        <div class="row fixed-top">
+            <app-header></app-header>
+        </div>
+        <div class="row fixed-top">
             <div class="col-sm-5">
                 <app-add-person></app-add-person>
             </div>
             <div class="col-sm-2">
-                
+
             </div>
             <div class="col-sm-5">
                 <app-person-grid></app-person-grid>
@@ -47,4 +49,5 @@
 </script>
 
 <style>
+
 </style>
