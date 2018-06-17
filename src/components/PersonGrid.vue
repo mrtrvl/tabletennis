@@ -1,22 +1,36 @@
 <template>
     <div class="row">
-        <app-person v-for="(person, index) in persons" :key="person.id">{{ person.rateOrder + ' ' + person.firstName + ' ' + person.lastName }}
-            <button class="btn btn-danger" @click="removePerson(index)">Kustuta</button>
-        </app-person>
+        <h2 class="text-center">Registreeritud mängijad:</h2>
+        <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Nr</th>
+                        <th>ID</th>
+                        <th>Reiting</th>
+                        <th>Nimi</th>
+                        <th>Sugu</th>
+                        <th></th>
+                    </tr>
+                    <tr v-for="(person, index) in persons" :key="person.id">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ person.personId }}</td>
+                        <td>{{ person.rateOrder }}</td>
+                        <td>{{ person.firstName + ' ' + person.lastName }}</td>
+                        <td>{{ person.sex }}</td>
+                        <td><button class="btn btn-danger" @click="removePerson(index)">Eemalda</button></td>
+                    </tr>
+                </tbody>
+            </table>
     </div>
 </template>
 
 <script>
-import Person from './Person.vue'
 
 export default {
     computed: {
         persons() {
             return this.$store.getters.getPersons;
         }
-    },
-    components: {
-        appPerson: Person
     },
     methods: {
         removePerson(index) {

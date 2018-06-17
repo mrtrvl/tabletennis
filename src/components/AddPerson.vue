@@ -1,7 +1,10 @@
 <template>
-    <div class="row text-center">
-        <input type="text" v-model="input">
-            <table>
+    <div class="row">
+        <h2 class="text-center">Lisa mängija</h2>
+        <div class="text-center">
+            <input class="form-control" type="text" v-model="input">
+        </div>
+            <table class="table table-striped">
                 <tbody>
                     <tr v-for="person in filteredPersons" :key="person.personId" v-if="input !=''" @click="addNewPerson(person.personId)">
                         <td>{{ person.personId + ' ' + person.rateOrder + ' ' + person.firstName + ' ' + person.lastName + ' ' + person.sex }}</td>
@@ -36,3 +39,10 @@ export default {
     }
 }
 </script>
+
+<style>
+tr {
+    cursor: pointer;
+}
+</style>
+
