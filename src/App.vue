@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 v-if="countAllPersons == 0">Mängijate nimekiri on laadimata!</h1>
+        <app-header></app-header>
         <app-add-person @personAdded="addNewPerson"></app-add-person>
         <app-person-grid :persons="persons" @personRemoved="removePerson"></app-person-grid>
         <p>Mängijaid: {{ countPersons }}</p>        
@@ -10,19 +10,18 @@
 <script>
     import PersonGrid from './components/PersonGrid.vue'
     import AddPerson from './components/AddPerson.vue'
+    import Header from './components/Header.vue'
 
     export default {
         computed: {
             countPersons() {
                 return this.$store.getters.countPersons;
-            },
-            countAllPersons() {
-                return this.$store.getters.countAllPersons;
             }
         },
         components: {
             appPersonGrid: PersonGrid,
-            appAddPerson: AddPerson
+            appAddPerson: AddPerson,
+            appHeader: Header
         },
         methods: {
             addNewPerson(person) {

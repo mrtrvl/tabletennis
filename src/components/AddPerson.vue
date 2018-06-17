@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="row text-center">
         <input type="text" v-model="input">
             <table>
                 <tbody>
