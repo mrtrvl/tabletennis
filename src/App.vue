@@ -1,9 +1,16 @@
 <template>
     <div class="container">
         <app-header></app-header>
-        <app-add-person @personAdded="addNewPerson"></app-add-person>
-        <app-person-grid :persons="persons" @personRemoved="removePerson"></app-person-grid>
-        <p>Mängijaid: {{ countPersons }}</p>        
+        <div class="row">
+            <div class="row-8">
+                <app-add-person></app-add-person>
+            </div>
+            <div class="row-8">
+                <app-person-grid></app-person-grid>
+            </div>
+        </div>
+        <p class="text-center">Mängijaid: {{ countPersons }}</p>   
+        <app-footer></app-footer>     
     </div>
 </template>
 
@@ -11,6 +18,7 @@
     import PersonGrid from './components/PersonGrid.vue'
     import AddPerson from './components/AddPerson.vue'
     import Header from './components/Header.vue'
+    import Footer from './components/Footer.vue'
 
     export default {
         computed: {
@@ -21,7 +29,8 @@
         components: {
             appPersonGrid: PersonGrid,
             appAddPerson: AddPerson,
-            appHeader: Header
+            appHeader: Header,
+            appFooter: Footer
         },
         methods: {
             addNewPerson(person) {
