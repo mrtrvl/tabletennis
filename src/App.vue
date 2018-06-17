@@ -2,10 +2,10 @@
     <div class="container">
         <app-header></app-header>
         <div class="row">
-            <div class="row-8">
+            <div class="col-sm-6">
                 <app-add-person></app-add-person>
             </div>
-            <div class="row-8">
+            <div class="col-sm-6">
                 <app-person-grid></app-person-grid>
             </div>
         </div>
