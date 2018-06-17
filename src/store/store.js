@@ -25,15 +25,19 @@ export const store = new Vuex.Store({
     },
     getters: {
         getPersons: state => {
-            const compare = (a,b) => {
+            const compareRateOrder = (a,b) => {
                 if (a.rateOrder < b.rateOrder)
                   return -1;
                 if (a.rateOrder > b.rateOrder)
                   return 1;
+                if (a.sex === 'N' && b.sex ==='M')
+                  return -1;
+                if (a.sex === 'M' && b.sex ==='N')
+                  return 1;
                 return 0;
               }
               
-            return state.persons.sort(compare);
+            return state.persons.sort(compareRateOrder);
         },
         countPersons: state => {
             return state.persons.length;
