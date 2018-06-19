@@ -38,12 +38,40 @@ export const store = new Vuex.Store({
                     Object.assign(state, JSON.parse(localStorage.getItem('store')))
                 );
             }
+            state.loading = false;
         },
         emptyPersonsList(state) {
             state.persons.splice(0, state.persons.length);
         },
         toggleExcelList(state, showExcelListStatus) {
             state.showExcelListState = showExcelListStatus;
+        },
+        fillList(state) {
+            let tableLength = 16;
+            let currentTableLength = state.persons.length;
+            if (currentTableLength > 96) {
+                tableLength = 128;
+            } else if (currentTableLength > 64) {
+                tableLength = 96;
+            } else if (currentTableLength > 48) {
+                tableLength = 64;
+            } else if (currentTableLength > 32) {
+                tableLength = 48;
+            } else if (currentTableLength > 24) {
+                tableLength = 32;
+            } else if (currentTableLength > 16) {
+                tableLength = 24;
+            }
+
+            while (state.persons.length != tableLength) {
+                state.persons.push({
+                    firstName: 'Bye',
+                    lastName: 'Bye',
+                    sex: '-',
+                    personId: 0,
+                    rateOrder: -1
+                });
+            }
         }
     },
     getters: {

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row fixed-top">
+        <div class="row">
             <app-header></app-header>
         </div>
         <div class="row">

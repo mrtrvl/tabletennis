@@ -3,6 +3,7 @@
         <div class="container">
             <button class="btn" :class="{ 'btn-success': countAllPersons === 0, 'btn-light': countAllPersons != 0 }" @click="getPersonsXML">Lae alla uued reitingud</button>
             <button class="btn btn-success" @click="showExcelList">Näita nimekirja excelisse kopeerimiseks</button>
+            <button class="btn btn-success" @click="fillList">Täida nimekiri</button>
             <h6><a href="mailto:mrt@mrt.ee">Martti Raavel</a></h6>
         </div>
     </footer>
@@ -24,10 +25,19 @@ export default {
             axios.get('http://www.lauatennis.ee/app_partner/app_eltlid_reitinguga_xml.php')
                 .then(response => {
                     parseString(response.data, (err, result) => {
-                        const persons = this.convertPersonsFromXML(result.PERSONS.PERSON);
-                        this.$store.commit('setAllPersons', persons);
-                        this.flash('Nimekiri laetud', 'success', {timeout: 3000});
-                        this.$store.commit('changeLoadingState', false);
+                        if (err) {
+                            throw new Error('Midagi läks nihu');
+                        } else {
+                            const persons = this.convertPersonsFromXML(result.PERSONS.PERSON);
+                            this.$store.commit('setAllPersons', persons);
+                            this.flash('Nimekiri laetud', 'success', {timeout: 3000});
+                            this.$store.commit('changeLoadingState', false);
+                        }  
+                })
+                .error((err) => {
+                    this.flash('Nimekirja laadimine ebaõnnestus!', 'danger', {timeout: 3000});
+                    this.$store.commit('changeLoadingState', false);
+                    console.error(err);
                 });        
             })
         },
@@ -50,6 +60,9 @@ export default {
         },
         showExcelList() {
             this.$store.commit('toggleExcelList', true);
+        },
+        fillList() {
+            this.$store.commit('fillList');
         }
     }
 }
