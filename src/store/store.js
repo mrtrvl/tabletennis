@@ -100,10 +100,11 @@ export const store = new Vuex.Store({
             return state.allPersons;
         },
         findPersonsByName: state => string => {
+            string = string.toLowerCase();
             return state.allPersons.filter(person => {return (person.firstName + ' ' + person.lastName).toLowerCase().includes(string.toLowerCase())});
         },
         isPersonInThePersonsList: state => personId => {
-            if (state.persons.filter(person => {return person.personId === personId}).length > 0) {
+            if (state.persons.find((person) => { return person.personId === personId; })) {
                 return true;
             } else {
                 return false;

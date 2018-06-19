@@ -33,20 +33,20 @@ export default {
                             this.flash('Nimekiri laetud', 'success', {timeout: 3000});
                             this.$store.commit('changeLoadingState', false);
                         }  
-                })
-                .error((err) => {
-                    this.flash('Nimekirja laadimine ebaõnnestus!', 'danger', {timeout: 3000});
+                })        
+            })
+            .catch((err) => {
+                    this.flash('Nimekirja laadimine ebaõnnestus!', 'error', {timeout: 3000});
                     this.$store.commit('changeLoadingState', false);
                     console.error(err);
-                });        
             })
         },
         convertPersonsFromXML(persons) {
             let convertedPersons = [];
             persons.forEach(person => {
                 convertedPersons.push({
-                    firstName: person.FIRSTNAME[0],
-                    lastName: person.FAMNAME[0],
+                    firstName: this.capitalizeString(person.FIRSTNAME[0]),
+                    lastName: this.capitalizeString(person.FAMNAME[0]),
                     sex: person.SEX[0],
                     personId: person.PERSONID[0],
                     rateOrder: person.RATEORDER[0] || 0
