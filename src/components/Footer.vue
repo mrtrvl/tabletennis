@@ -1,7 +1,11 @@
 <template>
-    <div class="row text-center">
-        <button class="btn" :class="{ 'btn-success': countAllPersons === 0, 'btn-light': countAllPersons != 0 }" @click="getPersonsXML">Lae alla mängijate nimekiri</button>
-    </div>
+    <footer class="footer text-center">
+        <div class="container">
+            <button class="btn" :class="{ 'btn-success': countAllPersons === 0, 'btn-light': countAllPersons != 0 }" @click="getPersonsXML">Lae alla uued reitingud</button>
+            <button class="btn btn-success" @click="showExcelList">Näita nimekirja excelisse kopeerimiseks</button>
+            <h6><a href="mailto:mrt@mrt.ee">Martti Raavel</a></h6>
+        </div>
+    </footer>
 </template>
 
 <script>
@@ -16,13 +20,14 @@ export default {
     },
     methods: {
         getPersonsXML() {
-            this.$store.commit('changeLoadingState');
+            this.$store.commit('changeLoadingState', true);
             axios.get('http://www.lauatennis.ee/app_partner/app_eltlid_reitinguga_xml.php')
                 .then(response => {
                     parseString(response.data, (err, result) => {
                         const persons = this.convertPersonsFromXML(result.PERSONS.PERSON);
                         this.$store.commit('setAllPersons', persons);
-                        this.$store.commit('changeLoadingState');
+                        this.flash('Nimekiri laetud', 'success', {timeout: 3000});
+                        this.$store.commit('changeLoadingState', false);
                 });        
             })
         },
@@ -42,7 +47,15 @@ export default {
         // https://paulund.co.uk/how-to-capitalize-the-first-letter-of-a-string-in-javascript
         capitalizeString(string) {
             return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        },
+        showExcelList() {
+            this.$store.commit('toggleExcelList', true);
         }
     }
 }
 </script>
+
+<style>
+
+</style>
+

@@ -1,7 +1,11 @@
 <template>
     <div class="row">
         <h2 class="text-center">Registreeritud mängijad:</h2>
-        <p class="text-center">Kokku nimekirjas: {{ countPersons }} mängijat</p>
+        <div class="text-center">
+            <p class="inlineWithButton">Kokku nimekirjas: {{ countPersons }} mängijat </p>
+            <button class="btn btn-danger btn-sm" @click="emptyPersonsList">Tühjenda nimekiri</button>
+            <p class="text-center inlineWithButton"></p>
+        </div>
         <table class="table table-striped">
             <tbody>
                 <tr>
@@ -39,6 +43,9 @@ export default {
     methods: {
         removePerson(index) {
             this.$store.commit('removePerson', index);
+        },
+        emptyPersonsList() {
+            this.$store.commit('emptyPersonsList');
         }
     }
 }
@@ -48,5 +55,9 @@ export default {
     .scrollable {
         max-height: 600px;
         overflow-y: scroll;
+    }
+    .inlineWithButton {
+        display: inline-block;
+        margin: 10px;
     }
 </style>

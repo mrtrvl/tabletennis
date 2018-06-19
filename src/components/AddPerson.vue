@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <h2 class="text-center">Lisa mängija</h2>
-        <p class="text-center">Kokku nimekirjas {{ countAllPersons }} inimest</p>
+        <p class="text-center">Kokku nimekirjas: {{ countAllPersons }} inimest {{ loadedDate | moment("HH:mm DD.MM.YYYY") }}</p>
         <div class="text-center">
             <input class="form-control" type="text" v-model="input">
         </div>
@@ -39,6 +39,9 @@ export default {
         },
         countAllPersons() {
             return this.$store.getters.countAllPersons;
+        },
+        loadedDate() {
+            return this.$store.getters.getLoadedDate;
         }
     },
     methods: {

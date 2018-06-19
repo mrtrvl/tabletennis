@@ -10,32 +10,41 @@ export const store = new Vuex.Store({
     state: {
         persons: [],
         allPersons: [],
-        loading: false
+        loading: false,
+        loadedDate: '',
+        showExcelListState: false
     },
     mutations: {
-      addPerson(state, personId) {
-        let person = state.allPersons.find((person) => { return person.personId === personId; });
-        if (person.sex === 'N') {
-            person.rateOrder *= 5;
+        addPerson(state, personId) {
+            let person = state.allPersons.find((person) => { return person.personId === personId; });
+            if (person.sex === 'N') {
+                person.rateOrder *= 5;
+            }
+            state.persons.push(person);
+        },
+        removePerson(state, index) {
+            state.persons.splice(index, 1);
+        },
+        setAllPersons(state, personListFromXML) {
+            state.allPersons = personListFromXML;
+            state.loadedDate = Date.now();
+        },
+        changeLoadingState(state, loadingStatus) {
+            state.loading = loadingStatus;
+        },
+        initialiseStore(state) {
+            if (localStorage.getItem('store')) {
+                this.replaceState(
+                    Object.assign(state, JSON.parse(localStorage.getItem('store')))
+                );
+            }
+        },
+        emptyPersonsList(state) {
+            state.persons.splice(0, state.persons.length);
+        },
+        toggleExcelList(state, showExcelListStatus) {
+            state.showExcelListState = showExcelListStatus;
         }
-        state.persons.push(person);
-      },
-      removePerson(state, index) {
-        state.persons.splice(index, 1);
-      },
-      setAllPersons(state, personListFromXML) {
-          state.allPersons = personListFromXML;
-      },
-      changeLoadingState(state) {
-          state.loading = !state.loading;
-      },
-      initialiseStore(state) {
-        if (localStorage.getItem('store')) {
-            this.replaceState(
-                Object.assign(state, JSON.parse(localStorage.getItem('store')))
-            );
-        }
-    }
     },
     getters: {
         getPersons: state => {
@@ -74,6 +83,12 @@ export const store = new Vuex.Store({
         },
         loadingState: state => {
             return state.loading;
+        },
+        getLoadedDate: state => {
+            return state.loadedDate;
+        },
+        getShowExcelListState: state => {
+            return state.showExcelListState;
         }
     }
 });
