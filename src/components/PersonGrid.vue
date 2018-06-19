@@ -1,26 +1,27 @@
 <template>
     <div class="row">
         <h2 class="text-center">Registreeritud mängijad:</h2>
+        <p class="text-center">Kokku nimekirjas: {{ countPersons }} mängijat</p>
         <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <th>Nr</th>
-                        <th>ID</th>
-                        <th>Reiting</th>
-                        <th>Nimi</th>
-                        <th>Sugu</th>
-                        <th></th>
-                    </tr>
-                    <tr v-for="(person, index) in persons" :key="person.id">
-                        <td>{{ index + 1 }}</td>
-                        <td>{{ person.personId }}</td>
-                        <td>{{ person.rateOrder }}</td>
-                        <td>{{ person.firstName + ' ' + person.lastName }}</td>
-                        <td>{{ person.sex }}</td>
-                        <td><button class="btn btn-danger" @click="removePerson(index)">Eemalda</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <tbody>
+                <tr>
+                    <th>Nr</th>
+                    <th>ID</th>
+                    <th>Reiting</th>
+                    <th>Nimi</th>
+                    <th>Sugu</th>
+                    <th></th>
+                </tr>
+                <tr v-for="(person, index) in persons" :key="person.id">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ person.personId }}</td>
+                    <td>{{ person.rateOrder }}</td>
+                    <td>{{ person.firstName + ' ' + person.lastName }}</td>
+                    <td>{{ person.sex }}</td>
+                    <td><button class="btn btn-danger btn-sm" @click="removePerson(index)">Eemalda</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -30,6 +31,9 @@ export default {
     computed: {
         persons() {
             return this.$store.getters.getPersons;
+        },
+        countPersons() {
+            return this.$store.getters.countPersons;
         }
     },
     methods: {

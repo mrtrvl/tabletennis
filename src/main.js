@@ -9,5 +9,8 @@ Vue.use(VueResource);
 new Vue({
   el: '#app',
   store,
+  beforeCreate() {
+		this.$store.commit('initialiseStore');
+	},
   render: h => h(App)
 })

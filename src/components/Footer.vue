@@ -1,6 +1,6 @@
 <template>
     <div class="row text-center">
-        <button class="btn" v-bind:class="{ 'btn-success': countAllPersons === 0, 'btn-light': countAllPersons != 0 }" @click="getPersonsXML">Lae alla mängijate nimekiri</button>
+        <button class="btn" :class="{ 'btn-success': countAllPersons === 0, 'btn-light': countAllPersons != 0 }" @click="getPersonsXML">Lae alla mängijate nimekiri</button>
     </div>
 </template>
 
@@ -39,6 +39,10 @@ export default {
             });
             return convertedPersons;
         },
+        // https://paulund.co.uk/how-to-capitalize-the-first-letter-of-a-string-in-javascript
+        capitalizeString(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        }
     }
 }
 </script>

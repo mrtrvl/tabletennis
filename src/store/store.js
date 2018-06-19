@@ -1,3 +1,6 @@
+// Saving into localstorage vuex tutorial:
+// https://www.mikestreety.co.uk/blog/vue-js-using-localstorage-with-the-vuex-store
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -25,7 +28,14 @@ export const store = new Vuex.Store({
       },
       changeLoadingState(state) {
           state.loading = !state.loading;
-      }
+      },
+      initialiseStore(state) {
+        if (localStorage.getItem('store')) {
+            this.replaceState(
+                Object.assign(state, JSON.parse(localStorage.getItem('store')))
+            );
+        }
+    }
     },
     getters: {
         getPersons: state => {
@@ -53,7 +63,7 @@ export const store = new Vuex.Store({
             return state.allPersons;
         },
         findPersonsByName: state => string => {
-            return state.allPersons.filter(person => {return (person.firstName + person.lastName).toLowerCase().includes(string.toLowerCase())});
+            return state.allPersons.filter(person => {return (person.firstName + ' ' + person.lastName).toLowerCase().includes(string.toLowerCase())});
         },
         isPersonInThePersonsList: state => personId => {
             if (state.persons.filter(person => {return person.personId === personId}).length > 0) {
@@ -66,4 +76,8 @@ export const store = new Vuex.Store({
             return state.loading;
         }
     }
+});
+
+store.subscribe((mutation, state) => {
+	localStorage.setItem('store', JSON.stringify(state));
 });

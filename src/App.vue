@@ -13,8 +13,7 @@
             <div class="col-sm-5">
                 <app-person-grid></app-person-grid>
             </div>
-        </div>
-        <p class="text-center">Mängijaid: {{ countPersons }}</p>   
+        </div>   
         <app-footer></app-footer>     
     </div>
 </template>
@@ -27,9 +26,7 @@
 
     export default {
         computed: {
-            countPersons() {
-                return this.$store.getters.countPersons;
-            }
+            
         },
         components: {
             appPersonGrid: PersonGrid,
