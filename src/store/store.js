@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
         allPersons: [],
         loading: false,
         loadedDate: '',
-        showExcelListState: false
+        showExcelListState: false,
+        showHelpState: false
     },
     mutations: {
         addPerson(state, personId) {
@@ -45,6 +46,9 @@ export const store = new Vuex.Store({
         },
         toggleExcelList(state, showExcelListStatus) {
             state.showExcelListState = showExcelListStatus;
+        },
+        toggleHelp(state, showHelpStatus) {
+            state.showHelpState = showHelpStatus;
         },
         fillList(state) {
             let tableLength = 16;
@@ -118,6 +122,9 @@ export const store = new Vuex.Store({
         },
         getShowExcelListState: state => {
             return state.showExcelListState;
+        },
+        getShowHelpState: state => {
+            return state.showHelpState;
         }
     }
 });

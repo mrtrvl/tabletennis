@@ -4,6 +4,7 @@
             <button class="btn" :class="{ 'btn-success': countAllPersons === 0, 'btn-light': countAllPersons != 0 }" @click="getPersonsXML">Lae alla uued reitingud</button>
             <button class="btn btn-success" @click="showExcelList">Näita nimekirja excelisse kopeerimiseks</button>
             <button class="btn btn-success" @click="fillList">Täida nimekiri</button>
+            <button class="btn btn-info" @click="showHelp">Abi</button>
             <h6><a href="mailto:mrt@mrt.ee">Martti Raavel</a></h6>
         </div>
     </footer>
@@ -60,6 +61,13 @@ export default {
         },
         showExcelList() {
             this.$store.commit('toggleExcelList', true);
+        },
+        showHelp() {
+            if (this.$store.getters.getShowHelpState) {
+                this.$store.commit('toggleHelp', false);
+            } else {
+                this.$store.commit('toggleHelp', true);
+            }
         },
         fillList() {
             this.$store.commit('fillList');

@@ -3,9 +3,9 @@
         <h2 class="text-center">Lisa mängija</h2>
         <p class="text-center">Kokku nimekirjas: {{ countAllPersons }} inimest {{ loadedDate }} seisuga</p>
         <div class="text-center">
-            <input class="form-control" type="text" v-model="input">
+            <input class="form-control" placeholder="Eesnimi Perekonnanimi" type="text" v-model="input">
         </div>
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
                 <tbody>
                     <tr>
                         <th>ID</th>

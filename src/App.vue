@@ -14,7 +14,8 @@
             <div class="col-sm-5">
                 <app-person-grid></app-person-grid>
             </div>
-        </div>   
+        </div>
+        <app-help v-if="showHelpState"></app-help>   
         <app-footer></app-footer>     
     </div>
 </template>
@@ -25,11 +26,15 @@
     import Header from './components/Header.vue'
     import Footer from './components/Footer.vue'
     import ListForExcel from './components/ListForExcel.vue'
+    import Help from './components/Help.vue'
 
     export default {
         computed: {
             showExcelListState() {
                 return this.$store.getters.getShowExcelListState;
+            },
+            showHelpState() {
+                return this.$store.getters.getShowHelpState;
             }
         },
         components: {
@@ -37,7 +42,8 @@
             appAddPerson: AddPerson,
             appHeader: Header,
             appFooter: Footer,
-            appListForExcel: ListForExcel
+            appListForExcel: ListForExcel,
+            appHelp: Help
         },
         methods: {
             addNewPerson(person) {
