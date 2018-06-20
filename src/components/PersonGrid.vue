@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <h2 class="text-center">Registreeritud mängijad:</h2>
+        <h3 class="text-center">Registreeritud mängijad:</h3>
         <div class="text-center">
             <p class="inlineWithButton">Kokku nimekirjas: {{ countPersons }} mängijat </p>
             <button class="btn btn-danger btn-sm" @click="emptyPersonsList">Tühjenda nimekiri</button>

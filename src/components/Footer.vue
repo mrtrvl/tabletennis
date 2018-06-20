@@ -45,12 +45,15 @@ export default {
         convertPersonsFromXML(persons) {
             let convertedPersons = [];
             persons.forEach(person => {
+                let rateOrder = person.RATEORDER[0];
+                if (rateOrder == 0 || rateOrder === 'undefined' ||  isNaN(rateOrder) || rateOrder === '') 
+                    rateOrder = 9000;
                 convertedPersons.push({
                     firstName: this.capitalizeString(person.FIRSTNAME[0]),
                     lastName: this.capitalizeString(person.FAMNAME[0]),
                     sex: person.SEX[0],
                     personId: person.PERSONID[0],
-                    rateOrder: person.RATEORDER[0] || 0
+                    rateOrder: rateOrder
                 });
             });
             return convertedPersons;
@@ -60,7 +63,11 @@ export default {
             return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
         },
         showExcelList() {
-            this.$store.commit('toggleExcelList', true);
+            if (this.$store.getters.getShowExcelListState) {
+                this.$store.commit('toggleExcelList', false);
+            } else {
+                this.$store.commit('toggleExcelList', true);
+            }
         },
         showHelp() {
             if (this.$store.getters.getShowHelpState) {

@@ -73,7 +73,7 @@ export const store = new Vuex.Store({
                     lastName: 'Bye',
                     sex: '-',
                     personId: 0,
-                    rateOrder: -1
+                    rateOrder: 10000
                 });
             }
         }
@@ -86,7 +86,7 @@ export const store = new Vuex.Store({
                 if (a.rateOrder > b.rateOrder)
                   return 1;
                 if (a.sex === 'N' && b.sex ==='M')
-                  return -1;
+                  return 1;
                 if (a.sex === 'M' && b.sex ==='N')
                   return 1;
                 return 0;

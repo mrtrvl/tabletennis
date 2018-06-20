@@ -1,9 +1,12 @@
 <template>
     <div class="row">
-        <h2 class="text-center">Lisa mängija</h2>
-        <p class="text-center">Kokku nimekirjas: {{ countAllPersons }} inimest {{ loadedDate }} seisuga</p>
-        <div class="text-center">
-            <input class="form-control" placeholder="Eesnimi Perekonnanimi" type="text" v-model="input">
+        <h3 class="text-center">Lisa mängija</h3>
+        <p class="text-center">Kokku nimekirjas: {{ countAllPersons }} inimest <span v-if="loadedDate !='-'">{{ loadedDate }} seisuga</span></p>
+        <div class="input-group text-center">
+            <div class="form-group has-feedback has-clear">
+                <input class="form-control" placeholder="Eesnimi Perekonnanimi" type="text" v-model="input">
+                <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback" :class="{ 'hidden': input === '' }" @click="clearInput"></span>
+            </div>
         </div>
             <table class="table table-striped table-hover">
                 <tbody>
@@ -34,17 +37,21 @@ export default {
     },
     computed: {
         filteredPersons() {
-            //return this.$store.getters.getAllPersons;
             return this.$store.getters.findPersonsByName(this.input);
         },
         countAllPersons() {
             return this.$store.getters.countAllPersons;
         },
         loadedDate() {
-            let date = new Date(this.$store.getters.getLoadedDate);
-            let convertedDate = date.getHours() + ':' + date.getMinutes() + ' ' + date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
+            let loadedDate = this.$store.getters.getLoadedDate;
+            if (loadedDate != '') {
+                let date = new Date(loadedDate);
+                let convertedDate = date.getHours() + ':' + date.getMinutes() + ' ' + date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
 
-            return convertedDate;
+                return convertedDate;
+            } else {
+                return '-';
+            }
         }
     },
     methods: {
@@ -53,8 +60,10 @@ export default {
                 alert("Mängija on juba nimekirjas");
             } else {
                 this.$store.commit('addPerson', personId);
-                this.input = '';
             }
+        },
+        clearInput() {
+            this.input = '';
         }
     }
 }
@@ -64,7 +73,18 @@ export default {
 tr {
     cursor: pointer;
 }
+
+::-ms-clear {
+  display: none;
+}
+
+.form-control-clear {
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.input-group {
+        display: block;
+}
 </style>
-
-
 

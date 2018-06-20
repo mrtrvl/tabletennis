@@ -4,7 +4,7 @@
         <flash-message></flash-message>
         <h1 v-if="loading">Laen mängijate nimekirja...</h1>
         <h1 v-if="countAllPersons === 0">Mängijate nimekiri on laadimata!</h1>
-        <h1 v-else>Lauatennise võistluse nimekiri</h1>
+        <h1 v-else class="font-weight-bold">Lauatennise võistluse nimekiri</h1>
     </div>
 </header>
 </template>
