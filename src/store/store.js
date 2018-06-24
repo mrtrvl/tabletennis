@@ -13,14 +13,19 @@ export const store = new Vuex.Store({
         loading: false,
         loadedDate: '',
         showExcelListState: false,
-        showHelpState: false
+        showHelpState: false,
+        showModal: false
     },
     mutations: {
         addPerson(state, personId) {
             let person = state.allPersons.find((person) => { return person.personId === personId; });
-            if (person.sex === 'N') {
-                person.rateOrder *= 5;
+            let personToPush = Object.assign({}, person);
+            if (person.sex === 'N' && person.rateOrder != 9000) {
+                personToPush.rateOrder *= 5;
             }
+            state.persons.push(personToPush);
+        },
+        addNewPerson(state, person) {
             state.persons.push(person);
         },
         removePerson(state, index) {
@@ -50,6 +55,9 @@ export const store = new Vuex.Store({
         toggleHelp(state, showHelpStatus) {
             state.showHelpState = showHelpStatus;
         },
+        toggleModal(state, showModalState) {
+            state.showModal = showModalState;
+        },
         fillList(state) {
             let tableLength = 16;
             let currentTableLength = state.persons.length;
@@ -73,7 +81,7 @@ export const store = new Vuex.Store({
                     lastName: 'Bye',
                     sex: '-',
                     personId: 0,
-                    rateOrder: 10000
+                    rateOrder: 100000
                 });
             }
         }
@@ -86,7 +94,7 @@ export const store = new Vuex.Store({
                 if (a.rateOrder > b.rateOrder)
                   return 1;
                 if (a.sex === 'N' && b.sex ==='M')
-                  return 1;
+                  return -1;
                 if (a.sex === 'M' && b.sex ==='N')
                   return 1;
                 return 0;
@@ -125,6 +133,9 @@ export const store = new Vuex.Store({
         },
         getShowHelpState: state => {
             return state.showHelpState;
+        },
+        showModal: state => {
+            return state.showModal;
         }
     }
 });

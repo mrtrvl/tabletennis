@@ -23,7 +23,8 @@ export default {
     methods: {
         getPersonsXML() {
             this.$store.commit('changeLoadingState', true);
-            axios.get('http://www.lauatennis.ee/app_partner/app_eltlid_reitinguga_xml.php')
+            let config = { headers: {'Access-Control-Allow-Origin': '*' }}
+            axios.get('http://www.lauatennis.ee/app_partner/app_eltlid_reitinguga_xml.php', config)
                 .then(response => {
                     parseString(response.data, (err, result) => {
                         if (err) {

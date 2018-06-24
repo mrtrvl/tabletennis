@@ -13,6 +13,10 @@
                     </p>
                     <table class="helpTable">  
                         <tr>
+                            <td><button class="btn btn-info">Lisa mängija, kes ei ole nimekirjas</button></td>
+                            <td>Võimaldab lisada registreeritud mängijate hulka mängija, kes ei ole reitingute nimekirjas</td>
+                        </tr>
+                        <tr>
                             <td><input class="form-control" placeholder="Eesnimi Perekonnanimi" type="text"></td>
                             <td>Nime otsingu väli. Otsingu välja all kuvatakse nimekiri otsingu vastustega. Inimese saad lisada registreeritud mängijate nimekirja tema nime peal klõpsates.</td>
                         </tr>

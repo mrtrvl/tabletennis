@@ -25,6 +25,10 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="text-center">
+                <button class="btn btn-info" @click="showModal">Lisa mängija, kes ei ole nimekirjas</button>
+            </div>
+            <br>
         </div>
 </template>
 
@@ -64,6 +68,9 @@ export default {
         },
         clearInput() {
             this.input = '';
+        },
+        showModal() {
+            this.$store.commit('toggleModal', true);
         }
     }
 }

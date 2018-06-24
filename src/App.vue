@@ -15,7 +15,8 @@
                 <app-person-grid></app-person-grid>
             </div>
         </div>
-        <app-help v-if="showHelpState"></app-help>   
+        <app-help v-if="showHelpState"></app-help> 
+        <app-add-person-modal v-if="showModal"></app-add-person-modal>  
         <app-footer></app-footer>     
     </div>
 </template>
@@ -27,6 +28,7 @@
     import Footer from './components/Footer.vue'
     import ListForExcel from './components/ListForExcel.vue'
     import Help from './components/Help.vue'
+    import AddPersonModal from './components/AddPersonModal.vue'
 
     export default {
         computed: {
@@ -35,7 +37,13 @@
             },
             showHelpState() {
                 return this.$store.getters.getShowHelpState;
+            },
+            showModal() {
+                return this.$store.getters.showModal;
             }
+        },
+        created: function () {
+            this.$store.commit('toggleModal', false);
         },
         components: {
             appPersonGrid: PersonGrid,
@@ -43,7 +51,8 @@
             appHeader: Header,
             appFooter: Footer,
             appListForExcel: ListForExcel,
-            appHelp: Help
+            appHelp: Help,
+            appAddPersonModal: AddPersonModal
         },
         methods: {
             addNewPerson(person) {
