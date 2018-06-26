@@ -1,22 +1,30 @@
 <template>
+<div>
     <table>
-        <tbody>
+        <tbody >
             <tr>
-                <th>Eesnimi</th>
-                <th>Perekonnanimi</th>
+                <th class="excelListCell">Eesnimi</th>
+                <th class="excelListCell">Perekonnanimi</th>
             </tr>
-            <br>
-            <tr v-for="person in persons" :key="person.id">
-                <td>{{ person.firstName }}</td>
-                <td>{{ person.lastName }}</td>
-            </tr>
-            <br>
-            <button class="btn btn-success" @click="hideExcelList(index)">Sulge</button>
         </tbody>
     </table>
+    <table class="excelList">
+        <tbody >
+            <tr v-for="person in persons" :key="person.id">
+                <td class="excelListCell">{{ person.firstName }}</td>
+                <td class="excelListCell">{{ person.lastName }}</td>
+            </tr>
+            <br>
+        </tbody>
+    </table>
+    <button class="btn btn-danger" @click="hideExcelList">Sulge</button>
+    <button class="btn btn-success btnClipboard" data-clipboard-target=".excelList">Kopeeri vahemällu</button>
+</div>
 </template>
 
 <script>
+new ClipboardJS('.btnClipboard');
+
 export default {
     computed: {
         persons() {
@@ -32,5 +40,8 @@ export default {
 </script>
 
 <style>
-
+    .excelListCell {
+        width: 100px;
+        cursor: text;
+    }
 </style>

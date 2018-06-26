@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^3.3.7",
+    "clipboard": "^2.0.1",
     "vue": "^2.0.1",
     "vue-awesome": "^2.3.7",
     "vue-flash-message": "^0.6.0",

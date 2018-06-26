@@ -37,6 +37,10 @@
                             <td>Näitab võisteljate nimekirja kujul mida saab Excelisse kopeerida. Exceli tabelisse tuleb kleepida ilma vorminduseta.</td>
                         </tr>
                         <tr>
+                            <td><button class="btn btn-success">Kopeeri vahemällu</button></td>
+                            <td>Kopeerib võistlejate tabeli vahemällu Excelisse asetamiseks</td>
+                        </tr>
+                        <tr>
                             <td><button class="btn btn-success">Täida nimekiri</button></td>
                             <td>Kui võistlejaid on vähem kui turniiritabeli täitmiseks vaja, siis täidab nimekirja nn kohatäidetega (Bye Bye)</td>
                         </tr>
