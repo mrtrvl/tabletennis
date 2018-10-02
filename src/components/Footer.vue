@@ -54,7 +54,7 @@ export default {
                     lastName: this.capitalizeString(person.FAMNAME[0]),
                     sex: person.SEX[0],
                     personId: person.PERSONID[0],
-                    rateOrder: rateOrder
+                    rateOrder: parseInt(rateOrder)
                 });
             });
             return convertedPersons;
