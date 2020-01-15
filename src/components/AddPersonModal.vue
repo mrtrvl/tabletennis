@@ -10,13 +10,15 @@
             </div>
             <div class="modal-body">
                 <div class="form-group has-feedback has-clear">
-                <input class="form-control" placeholder="Eesnimi" type="text" v-model="person.firstName">
-                <input class="form-control" placeholder="Perekonnanimi" type="text" v-model="person.lastName">
-                <select class="form-control" v-model="person.sex">
+                Eesnimi: <input class="form-control" placeholder="Eesnimi" type="text" v-model="person.firstName">
+                Perekonnanimi: <input class="form-control" placeholder="Perekonnanimi" type="text" v-model="person.lastName">
+                Sugu: <select class="form-control" v-model="person.sex">
                     <option value="" selected disabled>Vali sugu</option>
                     <option value="N">Naine</option>
                     <option value="M">Mees</option>
                 </select>
+                Reiting: (Kui inimesel reiting puudub, siis ära sisesta siia midagi!)
+                <input class="form-control" placeholder="Reiting" type="text" v-model="person.rateOrder">
             </div>
             </div>
             <div class="modal-footer">
@@ -36,7 +38,7 @@ export default {
                 firstName: '',
                 lastName: '',
                 sex: '',
-                rateOrder: 45001
+                rateOrder: 0
             }
         }
     },
@@ -48,6 +50,9 @@ export default {
             if (this.person.firstName === '' || this.person.lastName === '' || this.person.sex === '') {
                 alert('Kõik väljad peavad olema täidetud!');
             } else {
+                if (this.person.rateOrder === 0) {
+                    this.person.rateOrder = 45001;
+                }
                 this.$store.commit('addNewPerson', this.person);
                 this.hideModal();
             }
