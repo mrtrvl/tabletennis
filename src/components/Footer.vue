@@ -23,12 +23,12 @@ export default {
     methods: {
         getPersonsXML() {
             this.$store.commit('changeLoadingState', true);
-            let config = { headers: { 'Origin': 'http://www.lauatennis.ee' }}
-            axios.get('https://cors.bridged.cc/http://www.lauatennis.ee/app_partner/app_eltlid_reitinguga_xml.php')
+            axios.post('http://159.65.18.166:3000/cors', {url: 'http://www.lauatennis.ee/app_partner/app_eltlid_reitinguga_xml.php'})
                 .then(response => {
-                    parseString(response.data, (err, result) => {
+                    parseString(response.data.response, (err, result) => {
                         if (err) {
                             throw new Error('Midagi läks nihu');
+                            console.log(error);
                         } else {
                             const persons = this.convertPersonsFromXML(result.PERSONS.PERSON);
                             this.$store.commit('setAllPersons', persons);
