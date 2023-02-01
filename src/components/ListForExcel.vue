@@ -5,6 +5,8 @@
             <tr>
                 <th class="excelListCell">Eesnimi</th>
                 <th class="excelListCell">Perekonnanimi</th>
+                <th class="excelListCell">Nimi kokku</th>
+                <th class="excelListCell">ID</th>
             </tr>
         </tbody>
     </table>
@@ -13,6 +15,8 @@
             <tr v-for="person in persons" :key="person.id">
                 <td class="excelListCell">{{ person.firstName }}</td>
                 <td class="excelListCell">{{ person.lastName }}</td>
+                <td class="excelListCell">{{ person.firstName + ' ' + person.lastName }}</td>
+                <td class="excelListCell">{{ person.personId }}</td>
             </tr>
             <br>
         </tbody>
