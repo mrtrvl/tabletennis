@@ -13,4 +13,4 @@ new Vue({
 		this.$store.commit('initialiseStore');
 	},
   render: h => h(App)
-})
+});

@@ -88,7 +88,7 @@ export const store = new Vuex.Store({
     },
     getters: {
         getPersons: state => {
-            const compareRateOrder = (a,b) => {
+            const compareRateOrder = (a, b) => {
                 if (a.rateOrder < b.rateOrder)
                   return -1;
                 if (a.rateOrder > b.rateOrder)
