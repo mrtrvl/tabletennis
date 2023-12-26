@@ -59,7 +59,6 @@ export default {
         confirmRateOrder(person) {
             person.rateOrder = this.tempRateOrder;
             this.$store.commit('updatePerson', person);
-            console.log(person.rateOrder);
             this.tempRateOrder = null;
         },
     }
