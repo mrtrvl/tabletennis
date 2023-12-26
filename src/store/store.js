@@ -31,6 +31,11 @@ export const store = new Vuex.Store({
         removePerson(state, index) {
             state.persons.splice(index, 1);
         },
+        // update person in persons list
+        updatePerson(state, person) {
+            let index = state.persons.findIndex((personInList) => { return personInList.personId === person.personId; });
+            state.persons.splice(index, 1, person);
+        },
         setAllPersons(state, personListFromXML) {
             state.allPersons = personListFromXML;
             state.loadedDate = Date.now();
@@ -89,9 +94,9 @@ export const store = new Vuex.Store({
     getters: {
         getPersons: state => {
             const compareRateOrder = (a, b) => {
-                if (a.rateOrder < b.rateOrder)
+                if (Number(a.rateOrder) < Number(b.rateOrder))
                   return -1;
-                if (a.rateOrder > b.rateOrder)
+                if (Number(a.rateOrder) > Number(b.rateOrder))
                   return 1;
                 if (a.sex === 'N' && b.sex ==='M')
                   return -1;

@@ -18,7 +18,7 @@
                     <option value="M">Mees</option>
                 </select>
                 Reiting: (Kui inimesel reiting puudub, siis ära sisesta siia midagi!)
-                <input class="form-control" placeholder="Reiting" type="text" v-model="person.rateOrder">
+                <input class="form-control" placeholder="Reiting" type="number" v-model="person.rateOrder">
             </div>
             </div>
             <div class="modal-footer">

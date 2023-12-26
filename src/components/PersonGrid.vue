@@ -19,7 +19,8 @@
                 <tr v-for="(person, index) in persons" :key="person.id">
                     <td>{{ index + 1 }}</td>
                     <td>{{ person.personId }}</td>
-                    <td>{{ person.rateOrder }}</td>
+                    <!-- td><input class="rateOrder" type="text" v-model="person.rateOrder"/></td> -->
+                    <td><input class="rateOrder" type="number" :value="person.rateOrder" @input="updateRateOrder($event, person)" @keyup.enter="confirmRateOrder(person)" /></td>
                     <td>{{ person.firstName + ' ' + person.lastName }}</td>
                     <td>{{ person.sex }}</td>
                     <td><button class="btn btn-danger btn-sm" @click="removePerson(index)">Eemalda</button></td>
@@ -32,6 +33,11 @@
 <script>
 
 export default {
+    data() {
+        return {
+            tempRateOrder: null,
+        };
+    },
     computed: {
         persons() {
             return this.$store.getters.getPersons;
@@ -46,7 +52,16 @@ export default {
         },
         emptyPersonsList() {
             this.$store.commit('emptyPersonsList');
-        }
+        },
+        updateRateOrder(event, person) {
+            this.tempRateOrder = event.target.value;
+        },
+        confirmRateOrder(person) {
+            person.rateOrder = this.tempRateOrder;
+            this.$store.commit('updatePerson', person);
+            console.log(person.rateOrder);
+            this.tempRateOrder = null;
+        },
     }
 }
 </script>
@@ -59,5 +74,8 @@ export default {
     .inlineWithButton {
         display: inline-block;
         margin: 10px;
+    }
+    .rateOrder {
+        width: 70px;
     }
 </style>
