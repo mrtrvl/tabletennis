@@ -78,6 +78,12 @@ export const store = new Vuex.Store({
                 tableLength = 32;
             } else if (currentTableLength > 16) {
                 tableLength = 24;
+            } else if (currentTableLength > 12) {
+                tableLength = 16;
+            } else if (currentTableLength > 8) {
+                tableLength = 12;
+            } else {
+                tableLength = 8;
             }
 
             while (state.persons.length != tableLength) {
